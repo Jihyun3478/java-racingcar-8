@@ -1,8 +1,10 @@
 package racingcar;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Cars {
@@ -21,6 +23,8 @@ public class Cars {
 
     public List<Car> addCar(String carNames) {
         List<String> cars = parseCarNames(carNames.trim());
+        validateDuplicate(cars);
+        validateCarCount(cars);
         return cars.stream()
                 .map(Car::new)
                 .toList();
@@ -62,6 +66,20 @@ public class Cars {
             if (name.trim().isEmpty()) {
                 throw new IllegalArgumentException("쉼표(,)를 기준으로 올바르게 입력해주세요.");
             }
+        }
+    }
+
+    private void validateDuplicate(List<String> cars) {
+        Set<String> notDuplicateCars = new HashSet<>(cars);
+
+        if (cars.size() != notDuplicateCars.size()) {
+            throw new IllegalArgumentException("자동차 이름은 중복되지 않아야 합니다.");
+        }
+    }
+
+    private void validateCarCount(List<String> cars) {
+        if (cars.size() > 10) {
+            throw new IllegalArgumentException("자동차 수는 10대까지 가능합니다.");
         }
     }
 }
