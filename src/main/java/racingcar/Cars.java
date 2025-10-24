@@ -6,17 +6,24 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Cars {
-    private final List<String> cars;
+    private final List<Car> cars;
 
     public Cars(String carNames) {
         validate(carNames);
-        cars = parseCarNames(carNames.trim());
+        cars = addCar(carNames);
     }
 
     public void validate(String carNames) {
         validateIsEmpty(carNames);
         validateEdgeWithComma(carNames);
         validateOtherDelimiter(carNames);
+    }
+
+    public List<Car> addCar(String carNames) {
+        List<String> cars = parseCarNames(carNames.trim());
+        return cars.stream()
+                .map(Car::new)
+                .toList();
     }
 
     public int size() {
