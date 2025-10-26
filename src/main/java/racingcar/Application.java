@@ -11,6 +11,10 @@ public class Application {
 
         System.out.println("시도할 횟수는 몇 회인가요?");
         TrialCount trialCount = getTrialCount();
+
+        System.out.println("\n실행 결과");
+        Race race = new Race(cars, trialCount);
+        race.start();
     }
 
     private static TrialCount getTrialCount() {

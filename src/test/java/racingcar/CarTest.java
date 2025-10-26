@@ -3,10 +3,29 @@ package racingcar;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class CarTest {
+    @Test
+    @DisplayName("무작위 값이 4 이상이면, 전진한다.")
+    public void 무작위값_4_이상이면_전진() {
+        Car car = new Car("pobi");
+        car.move(4);
+
+        assertThat(car.getPosition()).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("무작위 값이 3 이하면, 정지한다.")
+    public void 무작위값_3_이하면_정지() {
+        Car car = new Car("pobi");
+        car.move(3);
+
+        assertThat(car.getPosition()).isEqualTo(0);
+    }
+
     @ParameterizedTest
     @ValueSource(strings = {"pobiwonijun", "junwonipobi"})
     @DisplayName("자동차 이름이 5자 이하가 아닌 경우 예외가 발생한다.")

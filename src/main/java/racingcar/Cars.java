@@ -30,6 +30,10 @@ public class Cars {
                 .toList();
     }
 
+    public List<Car> getCars() {
+        return cars;
+    }
+
     public int size() {
         return cars.size();
     }
