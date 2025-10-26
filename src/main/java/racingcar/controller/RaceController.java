@@ -1,36 +1,38 @@
 package racingcar.controller;
 
-import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
-import java.util.Objects;
 import racingcar.model.domain.Cars;
-import racingcar.model.domain.Race;
 import racingcar.model.domain.TrialCount;
+import racingcar.model.service.RaceService;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
 public class RaceController {
-    public void run() {
-        OutputView.requestCarNames();
-        Cars cars = inputCars();
+    private final RaceService raceService;
 
-        OutputView.requestTrialCount();
-        TrialCount trialCount = inputTrialCount();
+    public RaceController(RaceService raceService) {
+        this.raceService = raceService;
+    }
+
+    public void run() {
+        Cars cars = requestInputCars();
+        TrialCount trialCount = requestInputTrialCount();
 
         OutputView.promptRaceState();
-        Race race = new Race(cars, trialCount);
-        race.start();
-
-        List<String> winners = race.judgeWinners();
+        List<String> winners = raceService.start(cars, trialCount);
         OutputView.promptWinners(winners);
     }
 
-    private static Cars inputCars() {
+    private static Cars requestInputCars() {
+        OutputView.requestCarNames();
+
         String carNames = InputView.inputCar();
         return new Cars(carNames);
     }
 
-    private TrialCount inputTrialCount() {
+    private TrialCount requestInputTrialCount() {
+        OutputView.requestTrialCount();
+
         int trialCount = InputView.inputTrialCount();
         return new TrialCount(trialCount);
     }
