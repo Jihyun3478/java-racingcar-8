@@ -6,22 +6,23 @@ import java.util.Objects;
 import racingcar.model.domain.Cars;
 import racingcar.model.domain.Race;
 import racingcar.model.domain.TrialCount;
+import racingcar.view.OutputView;
 
 public class RaceController {
     public void run() {
-        System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
+        OutputView.requestCarNames();
         String carNames = Console.readLine();
         Cars cars = new Cars(carNames);
 
-        System.out.println("시도할 횟수는 몇 회인가요?");
+        OutputView.requestTrialCount();
         TrialCount trialCount = getTrialCount();
 
-        System.out.println("\n실행 결과");
+        OutputView.promptRaceState();
         Race race = new Race(cars, trialCount);
         race.start();
 
         List<String> winners = race.judgeWinners();
-        System.out.println("최종 우승자 : " + String.join(", ", winners));
+        OutputView.promptWinners(winners);
     }
 
     private TrialCount getTrialCount() {
