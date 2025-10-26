@@ -1,4 +1,4 @@
-package racingcar;
+package racingcar.model.domain;
 
 public class TrialCount {
     private final int trialCount;

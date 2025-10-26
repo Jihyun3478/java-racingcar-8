@@ -3,6 +3,9 @@ package racingcar;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
 import java.util.Objects;
+import racingcar.model.domain.Cars;
+import racingcar.model.domain.Race;
+import racingcar.model.domain.TrialCount;
 
 public class Application {
     public static void main(String[] args) {
