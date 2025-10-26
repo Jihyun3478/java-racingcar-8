@@ -6,16 +6,16 @@ import java.util.Objects;
 import racingcar.model.domain.Cars;
 import racingcar.model.domain.Race;
 import racingcar.model.domain.TrialCount;
+import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
 public class RaceController {
     public void run() {
         OutputView.requestCarNames();
-        String carNames = Console.readLine();
-        Cars cars = new Cars(carNames);
+        Cars cars = inputCars();
 
         OutputView.requestTrialCount();
-        TrialCount trialCount = getTrialCount();
+        TrialCount trialCount = inputTrialCount();
 
         OutputView.promptRaceState();
         Race race = new Race(cars, trialCount);
@@ -25,17 +25,13 @@ public class RaceController {
         OutputView.promptWinners(winners);
     }
 
-    private TrialCount getTrialCount() {
-        int trialCount = 0;
-        try {
-            String inputTrialCount = Console.readLine();
-            if (Objects.isNull(inputTrialCount) || inputTrialCount.trim().isEmpty()) {
-                throw new IllegalArgumentException("입력이 빈 값입니다.");
-            }
-            trialCount = Integer.parseInt(inputTrialCount);
-            return new TrialCount(trialCount);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("시도할 횟수는 숫자이어야 합니다.");
-        }
+    private static Cars inputCars() {
+        String carNames = InputView.inputCar();
+        return new Cars(carNames);
+    }
+
+    private TrialCount inputTrialCount() {
+        int trialCount = InputView.inputTrialCount();
+        return new TrialCount(trialCount);
     }
 }
