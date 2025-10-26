@@ -1,6 +1,7 @@
 package racingcar;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.List;
 import java.util.Objects;
 
 public class Application {
@@ -15,6 +16,9 @@ public class Application {
         System.out.println("\n실행 결과");
         Race race = new Race(cars, trialCount);
         race.start();
+
+        List<String> winners = race.judgeWinners();
+        System.out.println("최종 우승자 : " + String.join(", ", winners));
     }
 
     private static TrialCount getTrialCount() {

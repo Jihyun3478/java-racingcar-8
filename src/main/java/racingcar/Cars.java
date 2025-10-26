@@ -34,6 +34,13 @@ public class Cars {
         return cars;
     }
 
+    public int getMaxPosition() {
+        return cars.stream()
+                .mapToInt(Car::getPosition)
+                .max()
+                .orElse(0);
+    }
+
     public int size() {
         return cars.size();
     }

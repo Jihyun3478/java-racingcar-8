@@ -1,5 +1,7 @@
 package racingcar;
 
+import java.util.List;
+
 public class Race {
     private final Cars cars;
     private final TrialCount trialCount;
@@ -19,5 +21,12 @@ public class Race {
             }
             System.out.println();
         }
+    }
+
+    public List<String> judgeWinners() {
+        return cars.getCars().stream()
+                .filter(car -> car.getPosition() == cars.getMaxPosition())
+                .map(Car::getName)
+                .toList();
     }
 }
