@@ -1,6 +1,8 @@
 package racingcar.view;
 
 import java.util.List;
+import racingcar.model.domain.Car;
+import racingcar.model.domain.Cars;
 
 public class OutputView {
     public static void requestCarNames() {
@@ -15,7 +17,16 @@ public class OutputView {
         System.out.println("\n실행 결과");
     }
 
+
+
     public static void promptWinners(List<String> winners) {
         System.out.println("최종 우승자 : " + String.join(", ", winners));
+    }
+
+    public static void printRoundResult(Cars cars) {
+        for (Car car : cars.getCars()) {
+            System.out.println(car.toString());
+        }
+        System.out.println();
     }
 }

@@ -12,15 +12,14 @@ public class Race {
         this.trialCount = trialCount;
     }
 
-    public void start() {
-        for (int raceCount = 0; raceCount < trialCount.getTrialCount(); raceCount++) {
-            for (Car car : cars.getCars()) {
+    public Cars getCars() {
+        return cars;
+    }
 
-                int randomNumber = RandomGenerator.generateNumber();
-                car.move(randomNumber);
-                System.out.println(car.toString());
-            }
-            System.out.println();
+    public void playRound() {
+        for (Car car : cars.getCars()) {
+            int randomNumber = RandomGenerator.generateNumber();
+            car.move(randomNumber);
         }
     }
 
