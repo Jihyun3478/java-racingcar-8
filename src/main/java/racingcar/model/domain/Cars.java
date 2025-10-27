@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import racingcar.RandomGenerator;
 
 public class Cars {
     private final List<Car> cars;
@@ -21,24 +22,32 @@ public class Cars {
         validateOtherDelimiter(carNames);
     }
 
-    public List<Car> addCar(String carNames) {
-        List<String> cars = parseCarNames(carNames.trim());
-        validateDuplicate(cars);
-        validateCarCount(cars);
-        return cars.stream()
-                .map(Car::new)
-                .toList();
-    }
-
     public List<Car> getCars() {
         return cars;
     }
 
-    public int getMaxPosition() {
+    public List<Car> addCar(String carNames) {
+        List<String> cars = parseCarNames(carNames.trim());
+        validateDuplicate(cars);
+        validateCarCount(cars);
+
+        return createCars(cars);
+    }
+
+    public void moveAll() {
+        for (Car car : cars) {
+            int randomNumber = RandomGenerator.generateNumber();
+            car.move(randomNumber);
+        }
+    }
+
+    public List<String> findWinners() {
+        int maxPosition = getMaxPosition();
+
         return cars.stream()
-                .mapToInt(Car::getPosition)
-                .max()
-                .orElse(0);
+                .filter(car -> car.isMaxPosition(maxPosition))
+                .map(Car::getName)
+                .toList();
     }
 
     public int size() {
@@ -48,9 +57,23 @@ public class Cars {
     private List<String> parseCarNames(String carNames) {
         String[] extractCarNames = carNames.split(",");
         validateNoEmptyName(extractCarNames);
+
         return Arrays.stream(extractCarNames)
                 .map(String::trim)
                 .collect(Collectors.toList());
+    }
+
+    private List<Car> createCars(List<String> cars) {
+        return cars.stream()
+                .map(Car::new)
+                .toList();
+    }
+
+    private int getMaxPosition() {
+        return cars.stream()
+                .mapToInt(Car::getPosition)
+                .max()
+                .orElse(0);
     }
 
 

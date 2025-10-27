@@ -24,6 +24,10 @@ public class Car {
         }
     }
 
+    public boolean isMaxPosition(int position) {
+        return this.position == position;
+    }
+
     private void validate(String carName) {
         validateNameLength(carName.length());
         validateInsideWhiteSpace(carName);

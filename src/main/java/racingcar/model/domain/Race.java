@@ -1,7 +1,6 @@
 package racingcar.model.domain;
 
 import java.util.List;
-import racingcar.RandomGenerator;
 
 public class Race {
     private final Cars cars;
@@ -17,16 +16,10 @@ public class Race {
     }
 
     public void playRound() {
-        for (Car car : cars.getCars()) {
-            int randomNumber = RandomGenerator.generateNumber();
-            car.move(randomNumber);
-        }
+        cars.moveAll();
     }
 
     public List<String> judgeWinners() {
-        return cars.getCars().stream()
-                .filter(car -> car.getPosition() == cars.getMaxPosition())
-                .map(Car::getName)
-                .toList();
+        return cars.findWinners();
     }
 }
