@@ -3,7 +3,7 @@ package racingcar.model.domain;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import racingcar.RandomGenerator;
+import racingcar.util.RandomGenerator;
 import racingcar.util.CarNameParser;
 
 public class Cars {
