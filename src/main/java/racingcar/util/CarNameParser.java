@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import racingcar.model.domain.Car;
 
 public final class CarNameParser {
+    private CarNameParser() {}
+
     public static List<Car> parse(String carNames) {
         validateInputFormat(carNames);
         List<String> names = parseCarNames(carNames);
