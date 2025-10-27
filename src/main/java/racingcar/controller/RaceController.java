@@ -21,6 +21,8 @@ public class RaceController {
         OutputView.promptRaceState();
         List<String> winners = raceService.start(cars, trialCount);
         OutputView.promptWinners(winners);
+
+        InputView.close();
     }
 
     private static Cars requestInputCars() {
