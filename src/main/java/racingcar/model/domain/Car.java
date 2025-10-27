@@ -7,6 +7,10 @@ import static racingcar.constant.ErrorMessage.CAR_NAME_TOO_LONG;
 import java.util.Objects;
 
 public class Car {
+    private static final int ADVANCE_CONDITION = 4;
+    private static final int MAX_NAME_LENGTH = 5;
+    private static final String NAME_FORMAT_REGEX = "^[a-zA-Z가-힣0-9]+$";
+
     private final String name;
     private int position;
 
@@ -25,7 +29,7 @@ public class Car {
     }
 
     public void move(int randomNumber) {
-        if (randomNumber >= 4) {
+        if (randomNumber >= ADVANCE_CONDITION) {
             this.position += 1;
         }
     }
@@ -41,7 +45,7 @@ public class Car {
     }
 
     private void validateNameLength(int carNameLength) {
-        if (carNameLength > 5) {
+        if (carNameLength > MAX_NAME_LENGTH) {
             throw new IllegalArgumentException(CAR_NAME_TOO_LONG.getMessage());
         }
     }
@@ -53,7 +57,7 @@ public class Car {
     }
 
     private void validateNameFormat(String carName) {
-        if (!carName.matches("^[a-zA-Z가-힣0-9]+$")) {
+        if (!carName.matches(NAME_FORMAT_REGEX)) {
             throw new IllegalArgumentException(CAR_NAME_INVALID_FORMAT.getMessage());
         }
     }

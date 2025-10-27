@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 import racingcar.model.domain.Car;
 
 public final class CarNameParser {
+    private static final String NAME_DELIMITER = ",";
+
     private CarNameParser() {}
 
     public static List<Car> parse(String carNames) {
@@ -25,7 +27,7 @@ public final class CarNameParser {
     }
 
     private static List<String> parseCarNames(String carNames) {
-        String[] extractCarNames = carNames.split(",");
+        String[] extractCarNames = carNames.split(NAME_DELIMITER);
         validateNoEmptyName(extractCarNames);
 
         return Arrays.stream(extractCarNames)
@@ -46,13 +48,13 @@ public final class CarNameParser {
     }
 
     private static void validateEdgeWithComma(String carNames) {
-        if (carNames.startsWith(",") || carNames.endsWith(",")) {
+        if (carNames.startsWith(NAME_DELIMITER) || carNames.endsWith(NAME_DELIMITER)) {
             throw new IllegalArgumentException(CARS_INPUT_INVALID_COMMA.getMessage());
         }
     }
 
     private static void validateOtherDelimiter(String carNames) {
-        if (!carNames.contains(",")) {
+        if (!carNames.contains(NAME_DELIMITER)) {
             throw new IllegalArgumentException(CARS_INPUT_INVALID_COMMA.getMessage());
         }
     }

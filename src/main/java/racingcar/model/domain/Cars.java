@@ -10,6 +10,8 @@ import racingcar.util.RandomGenerator;
 import racingcar.util.CarNameParser;
 
 public class Cars {
+    private static final int MAX_CARS_SIZE = 10;
+
     private final List<Car> cars;
 
     private Cars(List<Car> cars) {
@@ -63,7 +65,7 @@ public class Cars {
     }
 
     private void validateCarCount(List<Car> cars) {
-        if (cars.size() > 10) {
+        if (cars.size() > MAX_CARS_SIZE) {
             throw new IllegalArgumentException(CARS_EXCEED_LIMIT.getMessage());
         }
     }
