@@ -12,7 +12,7 @@ public class RaceService {
 
         for (int round = 0; round < trialCount.trialCount(); round++) {
             race.playRound();
-            OutputView.printRoundResult(race.getCars());
+            OutputView.printRoundResult(race.currentCarInfos());
         }
         return race.judgeWinners();
     }

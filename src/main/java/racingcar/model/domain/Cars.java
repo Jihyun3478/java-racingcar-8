@@ -6,11 +6,13 @@ import static racingcar.constant.ErrorMessage.CARS_EXCEED_LIMIT;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import racingcar.util.RandomGenerator;
 import racingcar.util.CarNameParser;
 
 public class Cars {
     private static final int MAX_CARS_SIZE = 10;
+    private static final String LF = "\n";
 
     private final List<Car> cars;
 
@@ -33,6 +35,12 @@ public class Cars {
             int randomNumber = RandomGenerator.generateNumber();
             car.move(randomNumber);
         }
+    }
+
+    public List<String> getCarInfos() {
+        return cars.stream()
+                .map(Car::toString)
+                .toList();
     }
 
     public List<String> findWinners() {
@@ -68,5 +76,12 @@ public class Cars {
         if (cars.size() > MAX_CARS_SIZE) {
             throw new IllegalArgumentException(CARS_EXCEED_LIMIT.getMessage());
         }
+    }
+
+    @Override
+    public String toString() {
+        return cars.stream()
+                .map(Car::toString)
+                .collect(Collectors.joining(LF));
     }
 }

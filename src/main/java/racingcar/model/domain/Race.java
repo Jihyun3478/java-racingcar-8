@@ -9,15 +9,15 @@ public class Race {
         this.cars = cars;
     }
 
-    public Cars getCars() {
-        return cars;
-    }
-
     public void playRound() {
         cars.moveAll();
     }
 
     public List<String> judgeWinners() {
         return cars.findWinners();
+    }
+
+    public List<String> currentCarInfos() {
+        return cars.getCarInfos();
     }
 }

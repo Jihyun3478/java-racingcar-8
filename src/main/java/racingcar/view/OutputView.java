@@ -6,8 +6,6 @@ import static racingcar.constant.OutputMessage.REQUEST_CAR_NAMES;
 import static racingcar.constant.OutputMessage.REQUEST_TRIAL_COUNT;
 
 import java.util.List;
-import racingcar.model.domain.Car;
-import racingcar.model.domain.Cars;
 
 public class OutputView {
     public static void requestCarNames() {
@@ -22,9 +20,9 @@ public class OutputView {
         System.out.println(PROMPT_RACE_RESULT.getMessage());
     }
 
-    public static void printRoundResult(Cars cars) {
-        for (Car car : cars.getCars()) {
-            System.out.println(car.toString());
+    public static void printRoundResult(List<String> cars) {
+        for (String car : cars) {
+            System.out.println(car);
         }
         System.out.println();
     }
