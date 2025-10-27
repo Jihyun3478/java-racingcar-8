@@ -149,9 +149,33 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 예외_테스트_자동차_이름_양끝에_쉼표() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(",pobi,woni,jun,,", "1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_자동차_이름_다른_구분자() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("pobi.woni", "1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void 예외_테스트_자동차_이름_공백만() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("   ", "1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_자동차_이름_중간에_공백() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("po bi,woni", "1"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
