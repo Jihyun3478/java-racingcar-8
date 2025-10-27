@@ -1,37 +1,26 @@
 package racingcar.model.domain;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 import racingcar.RandomGenerator;
+import racingcar.util.CarNameParser;
 
 public class Cars {
     private final List<Car> cars;
 
-    public Cars(String carNames) {
-        validate(carNames);
-        cars = addCar(carNames);
+    private Cars(List<Car> cars) {
+        validate(cars);
+        this.cars = List.copyOf(cars);
     }
 
-    public void validate(String carNames) {
-        validateIsEmpty(carNames);
-        validateEdgeWithComma(carNames);
-        validateOtherDelimiter(carNames);
+    public static Cars from(String carNames) {
+        List<Car> cars = CarNameParser.parse(carNames);
+        return new Cars(cars);
     }
 
     public List<Car> getCars() {
         return cars;
-    }
-
-    public List<Car> addCar(String carNames) {
-        List<String> cars = parseCarNames(carNames.trim());
-        validateDuplicate(cars);
-        validateCarCount(cars);
-
-        return createCars(cars);
     }
 
     public void moveAll() {
@@ -50,25 +39,6 @@ public class Cars {
                 .toList();
     }
 
-    public int size() {
-        return cars.size();
-    }
-
-    private List<String> parseCarNames(String carNames) {
-        String[] extractCarNames = carNames.split(",");
-        validateNoEmptyName(extractCarNames);
-
-        return Arrays.stream(extractCarNames)
-                .map(String::trim)
-                .collect(Collectors.toList());
-    }
-
-    private List<Car> createCars(List<String> cars) {
-        return cars.stream()
-                .map(Car::new)
-                .toList();
-    }
-
     private int getMaxPosition() {
         return cars.stream()
                 .mapToInt(Car::getPosition)
@@ -76,42 +46,20 @@ public class Cars {
                 .orElse(0);
     }
 
-
-    private void validateIsEmpty(String carNames) {
-        if (Objects.isNull(carNames) || carNames.isEmpty()) {
-            throw new IllegalArgumentException("입력이 빈 값입니다.");
-        }
+    private void validate(List<Car> cars) {
+        validateDuplicate(cars);
+        validateCarCount(cars);
     }
 
-    private void validateEdgeWithComma(String carNames) {
-        if (carNames.startsWith(",") || carNames.endsWith(",")) {
-            throw new IllegalArgumentException("쉼표(,)를 기준으로 올바르게 입력해주세요.");
-        }
-    }
-
-    private void validateOtherDelimiter(String carNames) {
-        if (!carNames.contains(",")) {
-            throw new IllegalArgumentException("쉼표(,)를 기준으로 올바르게 입력해주세요.");
-        }
-    }
-
-    private void validateNoEmptyName(String[] carNames) {
-        for (String name : carNames) {
-            if (name.trim().isEmpty()) {
-                throw new IllegalArgumentException("쉼표(,)를 기준으로 올바르게 입력해주세요.");
-            }
-        }
-    }
-
-    private void validateDuplicate(List<String> cars) {
-        Set<String> notDuplicateCars = new HashSet<>(cars);
+    private void validateDuplicate(List<Car> cars) {
+        Set<Car> notDuplicateCars = new HashSet<>(cars);
 
         if (cars.size() != notDuplicateCars.size()) {
             throw new IllegalArgumentException("자동차 이름은 중복되지 않아야 합니다.");
         }
     }
 
-    private void validateCarCount(List<String> cars) {
+    private void validateCarCount(List<Car> cars) {
         if (cars.size() > 10) {
             throw new IllegalArgumentException("자동차 수는 10대까지 가능합니다.");
         }

@@ -16,7 +16,7 @@ public class RaceServiceTest {
 
     @BeforeEach
     void setUp() {
-        cars = new Cars("pobi,woni,jun");
+        cars = Cars.from("pobi,woni,jun");
         trialCount = new TrialCount(3);
         raceService = new RaceService();
     }

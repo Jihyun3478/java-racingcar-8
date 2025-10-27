@@ -27,7 +27,7 @@ public class RaceController {
         OutputView.requestCarNames();
 
         String carNames = InputView.inputCar();
-        return new Cars(carNames);
+        return Cars.from(carNames);
     }
 
     private TrialCount requestInputTrialCount() {

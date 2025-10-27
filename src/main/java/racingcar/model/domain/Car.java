@@ -1,5 +1,7 @@
 package racingcar.model.domain;
 
+import java.util.Objects;
+
 public class Car {
     private final String name;
     private int position;
@@ -55,5 +57,19 @@ public class Car {
     @Override
     public String toString() {
         return name + " : " + "-".repeat(position);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        Car car = (Car) object;
+        return position == car.position && Objects.equals(name, car.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, position);
     }
 }
