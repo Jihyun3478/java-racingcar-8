@@ -30,6 +30,6 @@ public class OutputView {
     }
 
     public static void promptWinners(List<String> winners) {
-        System.out.println(PROMPT_WINNER.getMessage() + String.join(", ", winners));
+        System.out.print(PROMPT_WINNER.getMessage() + String.join(", ", winners));
     }
 }
