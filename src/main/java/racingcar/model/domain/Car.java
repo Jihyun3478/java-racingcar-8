@@ -1,5 +1,9 @@
 package racingcar.model.domain;
 
+import static racingcar.constant.ErrorMessage.CAR_NAME_CONTAINS_WHITESPACE;
+import static racingcar.constant.ErrorMessage.CAR_NAME_INVALID_FORMAT;
+import static racingcar.constant.ErrorMessage.CAR_NAME_TOO_LONG;
+
 import java.util.Objects;
 
 public class Car {
@@ -38,19 +42,19 @@ public class Car {
 
     private void validateNameLength(int carNameLength) {
         if (carNameLength > 5) {
-            throw new IllegalArgumentException("자동차 이름은 5자 이하만 가능합니다.");
+            throw new IllegalArgumentException(CAR_NAME_TOO_LONG.getMessage());
         }
     }
 
     private void validateInsideWhiteSpace(String carName) {
         if (carName.contains(" ")) {
-            throw new IllegalArgumentException("자동차 이름에 공백이 포함되어 있습니다.");
+            throw new IllegalArgumentException(CAR_NAME_CONTAINS_WHITESPACE.getMessage());
         }
     }
 
     private void validateNameFormat(String carName) {
         if (!carName.matches("^[a-zA-Z가-힣0-9]+$")) {
-            throw new IllegalArgumentException("자동차 이름은 문자와 숫자만 가능합니다.");
+            throw new IllegalArgumentException(CAR_NAME_INVALID_FORMAT.getMessage());
         }
     }
 

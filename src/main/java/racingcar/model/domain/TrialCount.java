@@ -1,5 +1,7 @@
 package racingcar.model.domain;
 
+import static racingcar.constant.ErrorMessage.TRIAL_COUNT_INVALID_RANGE;
+
 public class TrialCount {
     private final int trialCount;
 
@@ -14,7 +16,7 @@ public class TrialCount {
 
     private void validateNegative(int trialCount) {
         if (trialCount <= 0) {
-            throw new IllegalArgumentException("시도할 횟수는 1 이상이어야 합니다.");
+            throw new IllegalArgumentException(TRIAL_COUNT_INVALID_RANGE.getMessage());
         }
     }
 }

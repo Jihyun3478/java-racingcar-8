@@ -1,5 +1,7 @@
 package racingcar.view;
 
+import static racingcar.constant.ErrorMessage.TRIAL_COUNT_ALWAYS_NUMBER;
+
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
@@ -12,7 +14,7 @@ public class InputView {
             String inputTrialCount = Console.readLine();
             return Integer.parseInt(inputTrialCount);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("시도할 횟수는 숫자이어야 합니다.");
+            throw new IllegalArgumentException(TRIAL_COUNT_ALWAYS_NUMBER.getMessage());
         }
     }
 

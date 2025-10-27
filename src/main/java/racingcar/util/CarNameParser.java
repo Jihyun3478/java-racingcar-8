@@ -1,5 +1,8 @@
 package racingcar.util;
 
+import static racingcar.constant.ErrorMessage.CARS_INPUT_EMPTY;
+import static racingcar.constant.ErrorMessage.CARS_INPUT_INVALID_COMMA;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -38,26 +41,26 @@ public final class CarNameParser {
 
     private static void validateIsEmpty(String carNames) {
         if (Objects.isNull(carNames) || carNames.isEmpty()) {
-            throw new IllegalArgumentException("입력이 빈 값입니다.");
+            throw new IllegalArgumentException(CARS_INPUT_EMPTY.getMessage());
         }
     }
 
     private static void validateEdgeWithComma(String carNames) {
         if (carNames.startsWith(",") || carNames.endsWith(",")) {
-            throw new IllegalArgumentException("쉼표(,)를 기준으로 올바르게 입력해주세요.");
+            throw new IllegalArgumentException(CARS_INPUT_INVALID_COMMA.getMessage());
         }
     }
 
     private static void validateOtherDelimiter(String carNames) {
         if (!carNames.contains(",")) {
-            throw new IllegalArgumentException("쉼표(,)를 기준으로 올바르게 입력해주세요.");
+            throw new IllegalArgumentException(CARS_INPUT_INVALID_COMMA.getMessage());
         }
     }
 
     private static void validateNoEmptyName(String[] carNames) {
         for (String name : carNames) {
             if (name.trim().isEmpty()) {
-                throw new IllegalArgumentException("쉼표(,)를 기준으로 올바르게 입력해주세요.");
+                throw new IllegalArgumentException(CARS_INPUT_INVALID_COMMA.getMessage());
             }
         }
     }
