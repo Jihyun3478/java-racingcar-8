@@ -4,11 +4,9 @@ import java.util.List;
 
 public class Race {
     private final Cars cars;
-    private final TrialCount trialCount;
 
-    public Race(Cars cars, TrialCount trialCount) {
+    public Race(Cars cars) {
         this.cars = cars;
-        this.trialCount = trialCount;
     }
 
     public Cars getCars() {
